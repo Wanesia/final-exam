@@ -1,0 +1,105 @@
+
+body::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3); /* This creates the dark overlay */
+  z-index: -1; /* Ensure the overlay doesn't cover the content */
+}
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    color: white;
+  }
+  .register-form input{
+    width: 100%;
+  }
+  .text{
+    text-align: center;
+    margin-top: 1rem;
+    padding: 1rem;
+    color: white;
+    font-size: 1.5rem;
+  }
+  form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .register-form {
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 25%;
+    padding: 1rem;
+    margin: 2rem auto;
+    border-radius: 10px;
+  }
+  .label{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    margin: auto;
+  }
+  .label input{
+    width: 10%;
+    margin-left: 15%;
+  }
+  
+  input {
+    padding: 1rem;
+    justify-content: center;
+    margin: 1rem 0;
+    border: none;
+    border-radius: 5px;
+  }
+
+  input[type='submit'] {
+    width: 50%;
+    padding: 1rem;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #8c37ec;
+    color: white;
+    cursor: pointer;
+  }
+
+  input[type='submit']:hover {
+    background-color: #7921de;
+  }
+
+  .footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+  }
+  .error-message {
+    font-size: 1.5rem;
+    position: absolute;
+    top: 4rem; 
+    left: 50%;
+    transform: translateX(-50%);
+
+}
+.logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.logo img {
+  width: 200px;
+  height: auto; 
+
+}

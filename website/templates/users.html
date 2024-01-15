@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='users.css') }}">
+    <script src="https://kit.fontawesome.com/aee8286ff9.js" crossorigin="anonymous"></script>
+
+{% endblock %}
+
+
+  
+{% block content %}
+<div class="users-container">
+    <ul class="users-list">
+        <div class="search">
+            <form action="{{ url_for('auth.search_users') }}" method="get">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" name="username" placeholder="Search by username" >                
+                {% for tag in all_tags %}
+                    <label>
+                        <input type="checkbox" name="tags" value="{{ tag.id }}">
+                        {{ tag.tag_name }}
+                    </label>
+                {% endfor %}
+                
+                <button type="submit">Search</button>
+            </form>
+        </div>
+       
+        
+        <div class="users-container">
+            {% for user in users %}
+            
+            <li class="user-element">
+                <a href="{{ url_for('auth.user_profile', user_id=user.id) }}" class="user-tile">
+                    <img class="pfp" src="{{ url_for('auth.uploaded_file', filename=user.pfp) }}" alt="Profile Picture">
+                    <div class="text">
+                        <h2>{{ user.username }}</h2>
+                        <p>{{ user.about_me }}</p>
+                    </div>
+                     
+                </a>
+            </li>
+
+
+            {% endfor %}
+        </div>
+  
+</div>
+{% endblock %}
+

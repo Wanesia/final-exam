@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block extra_head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='edit.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <form action="{{ url_for('auth.edit') }}" method="post" enctype="multipart/form-data">
+        <div class="pfp-section">
+            <label for="file-upload">Upload your pfp here</label>
+            <input class="upload" type="file" name="profile_picture">
+        </div>
+        <div class="tags-section">
+            <p>Select your tags:</p>
+            <label>
+                <input type="checkbox" name="tags" value="transmog" {% if "transmog" in user_tags %} checked {% endif %}>
+                Transmog
+            </label>        
+            <label>
+                <input type="checkbox" name="tags" value="pvp" {% if "pvp" in user_tags %} checked {% endif %}>
+                Pvp
+            </label>
+            <label>
+                <input type="checkbox" name="tags" value="pve" {% if "pve" in user_tags %} checked {% endif %}>
+                Pve
+            </label>
+            <label>
+                <input type="checkbox" name="tags" value="social" {% if "social" in user_tags %} checked {% endif %}>
+                Social
+            </label>
+            <label>
+                <input type="checkbox" name="tags" value="raid" {% if "raid" in user_tags %} checked {% endif %}>
+                Raid
+            </label>
+        </div>
+        <div class="about">
+            <label for="about">About Me:</label>
+            <textarea name="about" id="about" maxlength="300" rows="4" cols="50" placeholder="Tell us about yourself...">{{ user.about_me }}</textarea>
+        </div>
+        <div class="description">
+            <label for="description">Description:</label>
+            <textarea name="description" id="description" maxlength="1500" rows="6" cols="50" placeholder="Enter your detailed description here...">{{ user.description }}</textarea>
+        </div>
+        <input type="submit" value="Submit">
+    </form>
+</div>
+
+{% endblock %}

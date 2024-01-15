@@ -1,0 +1,41 @@
+.users-container {
+    padding: 1rem;
+}
+
+ul, ol {
+    list-style: none; 
+}
+
+
+.user-element {
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 10px; 
+    margin-bottom: 1rem; 
+}
+
+.user-tile {
+    display: flex;
+    align-items: center;
+    text-decoration: none; 
+    color: white;
+    padding: 1rem; 
+
+}
+
+.user-tile .pfp {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 1rem; 
+}
+
+.friends{
+    padding: 1rem;
+    color: white;
+    font-size: 2.2rem;
+    font-weight: 500;
+    margin-top: 5rem;
+}
+.user-element{
+    width: 20rem;
+}

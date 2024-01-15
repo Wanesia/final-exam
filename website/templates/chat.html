@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+    {% block extra_head %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='chat.css') }}">
+    {% endblock %}
+
+{% block content %}
+    <div class="chat" id="chat">
+        <ul class="messages" id="messages">
+            {% for message in messages %}
+                <li class="message">{{ message.sender.username }}: {{ message.body }}</li>
+            {% endfor %}
+        </ul>
+        <input type="text" id="message" />
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var messageInput = document.getElementById('message');
+            
+            messageInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();  
+                    sendMessage();
+                }
+            });
+
+        });
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+        socket.on('connect', function() {
+            socket.emit('join_chat', {recipient_id: "{{ recipient.id }}"});
+        });
+
+        socket.on('new_message', function(data) {
+            var messageList = document.getElementById('messages');
+            var newMessage = document.createElement('li');
+            newMessage.className = 'message';
+            newMessage.textContent = data.username + ": " + data.msg;
+            messageList.appendChild(newMessage);
+            messageList.scrollTop = messageList.scrollHeight;
+        });
+        
+        function sendMessage() {
+            var messageInput = document.getElementById('message');
+            var messageText = messageInput.value.trim();
+
+            if (messageText) {
+                socket.emit('send_message', {
+                    msg: messageText, 
+                    recipient_id: "{{ recipient.id }}"
+                });
+                messageInput.value = '';
+         }
+        }
+
+
+    </script>
+{% endblock %}

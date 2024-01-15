@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="text">
+        <h1 class="main-title">Welcome to WoW Hub</h1>
+        <p class="main-text">Create account and connect with players all around the Azeroth!</p>
+        <ul class="list">
+          <li>Make new friends</li>
+          <li>Find the best guilds</li>
+          <li>Organize events</li>
+          <li>Connect with players like you</li>
+        </ul>
+      </div>
+  
+  <div class="login-form">
+    <form action="/login" method="POST">
+      <input type="email" name="email" placeholder="Enter your email" required>
+      <input type="password" name="password" placeholder="Enter your password" required>
+      <input class="submit-btn" type="submit" value="Login">
+      <label class="remember-me">
+        <input type="checkbox" checked="checked" name="remember"> Remember me
+      </label>
+      <a href="#" style="color: white;">Forgot password?</a>
+    </form>
+
+  </div>
+</div>
+
+<div class="footer">
+  <p>Not a member? <a href="{{ url_for('auth.register') }}" style="color: white;">Sign up now</a></p>
+</div>
+
+{% endblock %}

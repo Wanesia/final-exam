@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='friends.css') }}">
+    <script src="https://kit.fontawesome.com/aee8286ff9.js" crossorigin="anonymous"></script>
+
+{% endblock %}
+
+
+  
+{% block content %}
+<div class="users-container">
+    <p class="friends">Your friends list:</p>
+    <ul class="users-list">
+        
+        <div class="users-container">
+            {% for user in friends %}
+            
+            <li class="user-element">
+                <a href="{{ url_for('auth.user_profile', user_id=user.id) }}" class="user-tile">
+                    <img class="pfp" src="{{ url_for('auth.uploaded_file', filename=user.pfp) }}" alt="Profile Picture">
+                    <div class="text">
+                        <h2>{{ user.username }}</h2>
+                    </div>
+                     
+                </a>
+            </li>
+
+
+            {% endfor %}
+        </div>
+  
+</div>
+{% endblock %}
+

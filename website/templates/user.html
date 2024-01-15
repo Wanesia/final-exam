@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='page.css') }}">
+{% endblock %}<link rel="preconnect" href="https://fonts.googleapis.com">
+
+
+
+
+{% block content %}
+
+<div class="container">
+    {% if current_user.is_authenticated %}
+    <div class="left-container">
+        {% if user.pfp %}
+            <img class="pfp" src="{{ url_for('auth.uploaded_file', filename=user.pfp) }}" alt="Profile Picture">
+        {% else %}
+            <img class="pfp" src="{{ url_for('static', filename='cat.jpg') }}" alt="Profile Picture">
+        {% endif %}
+        <h1>{{ user.username }}</h1>
+        <h3 class="tags">Tags: 
+            {% for tag in user.tags %}
+                {{ tag.tag_name }}{% if not loop.last %}, {% endif %}
+            {% endfor %}
+        </h3>
+        <h1 class="about">About me:</h1>
+        <p>{{ user.about_me }}</p>
+    </div>
+    <div class="right-container">
+        <div class="description-section">
+            <h1 class="description">Description</h1>
+            <p>{{ user.description }}</p>
+        </div>
+        
+        <div class="buttons">
+        {% if current_user.is_authenticated and current_user.id != user.id %}
+            <a href="{{ url_for('auth.chat', recipient_id=recipient.id) }}" class="chat-button">Chat</a>
+            {% if are_friends %}
+                <form action="{{ url_for('auth.unfriend', friend_id=user.id) }}" method="post">
+                    <input class="unfriend" type="submit" value="Unfriend">
+                </form>
+            {% else %}
+                <a href="{{ url_for('auth.add_friend', user_id=user.id) }}">Add as a Friend</a>
+            {% endif %}
+        {% endif %}
+        </div>
+
+
+    </div>   
+    {% endif %}
+    
+
+{% endblock %}
+

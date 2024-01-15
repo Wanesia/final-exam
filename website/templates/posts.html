@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='posts.css') }}">
+    <script src="{{ url_for('static', filename='js/upvote.js') }}"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+{% endblock %}
+
+
+{% block content %}
+
+<div class="posts-container">
+    <a href="{{ url_for('auth.create_post') }}" class="create-btn">Create Post</a>
+    <ul class="posts-list">
+        {% for post in posts %}
+            <li class="post-element">
+                <a href="{{ url_for('auth.view_post', post_id=post.id) }}" class="post-link">
+                    <p>Posted by: <b>{{ post.author.username }}</b> at {{ post.date_of_creation | datetime }}</p>
+                    <h2>{{ post.title }}</h2>
+                    <p>{{ post.content | truncate(715) }}</p>
+                </a>
+                <div class="post-details">
+                    <button onclick="upvote({{ post.id }})" class="upvote-btn" id="upvote-btn-{{ post.id }}">Upvote</button>
+                    <p class="upvote-count" id="upvote-count-{{ post.id }}">Upvotes: {{ post.upvoted_by.count() }}</p>
+                    <p class="comment-count" id="comments-count-{{ post.id }}">Comments: {{ post.comments.count() }}</p>
+                </div>     
+            </li>
+        
+        {% endfor %}
+        </ul>
+  
+</div>
+{% endblock %}
+
+

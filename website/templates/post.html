@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+    {% block extra_head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='post.css') }}">
+    <script src="https://kit.fontawesome.com/aee8286ff9.js" crossorigin="anonymous"></script>
+    {% endblock %}
+    
+{% block content %}
+{% if current_user.id == post.user_id %}
+<form action="{{ url_for('auth.delete_post', post_id=post.id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this post?');">
+    <button type="submit" class="delete-btn" style="background: none; border: none;">
+        <i class="fa-solid fa-trash" style="color: #ffffff; cursor: pointer;"></i>
+    </button>
+</form>
+{% endif %}
+
+    <div class="post-detail">
+        <div class="post-main">
+            <p>Posted by: {{ post.author.username }} at {{ post.date_of_creation | datetime }}</p>
+
+            <h1>{{ post.title }}</h1>
+            <p>{{post.content}}</p>
+        </div>
+        
+        {% if post.media_file %}
+            <div class="post-media">
+                <img src="{{ url_for('auth.uploaded_file', filename=post.media_file) }}" alt="Post Media">
+            </div>
+        {% endif %}
+        
+        <div class="post-comments">
+            <h3>Comments:</h3>
+            <form class="comment-form" action="{{ url_for('auth.add_comment', post_id=post.id) }}" method="POST">
+                <textarea name="comment_content" placeholder="Write your comment here..."></textarea>
+                <button class="comment-btn" type="submit">Add Comment</button>
+            </form>
+            {% for comment in post.comments %}
+                <div class="comment">
+                    <p><b>{{ comment.author.username }}</b> at {{ post.date_of_creation | datetime }}</p>
+                    
+                    <p>{{ comment.content }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+{% endblock %}

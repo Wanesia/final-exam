@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='page.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% if current_user.is_authenticated %}
+    <div class="left-container">
+        {% if current_user.pfp %}
+        <img class="pfp" src="{{ url_for('auth.uploaded_file', filename=current_user.pfp) }}" alt="Profile Picture">
+        {% else %}
+        <img class="pfp" src="{{ url_for('static', filename='cat.jpg') }}" alt="Profile Picture">
+        {% endif %}        
+        <h1>{{ current_user.username }}</h1>
+        <h3 class="tags">Tags: 
+            {% for tag in current_user.tags %}
+                {{ tag.tag_name }}{% if not loop.last %}, {% endif %}
+            {% endfor %}
+        </h3>
+        <h1 class="about">About me:</h1>
+        <p>{{ current_user.about_me }}</p>
+    </div>
+    <div class="right-container">
+        <div class="description-section">
+            <h1 class="description">Description</h1>
+            <p>{{ current_user.description }}</p>
+        </div>
+
+        <div class="buttons">
+            <a href="{{ url_for('auth.friends') }}">Friends</a>
+            <a href="{{ url_for('auth.edit') }}">Edit Profile</a>
+            <a href="{{ url_for('auth.edit') }}">Settings</a>
+        </div>
+    </div>
+    {% endif %}        
+</div>
+
+{% endblock %}

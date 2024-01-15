@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block extra_head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='register.css') }}">
+{% endblock %}
+
+
+
+{% block content %}
+
+
+<div class="container">
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+      <p class="error-message" id="message">{{ messages[0] }}</p>
+  {% endif %}
+  {% endwith %}
+  
+  <div class="register-form">
+    <div class="text">
+        <p>Register now for <b>FREE</b></p>
+    </div>
+    <form action="/register" method="POST">
+      <input type="username" name="username" placeholder="Enter your username" required>
+      <input type="email" name="email" placeholder="Enter your email" required>
+      <input type="password" name="password" placeholder="Enter your password" required>
+      <input type="password" name="password2" placeholder="Confirm your password" required>
+      <input type="submit" value="register">
+      <label class ="label">
+        <input type="checkbox" checked="checked" name="updates">
+        <p>Get updates on your e-mail</p>
+      </label>
+      <p>Already have account? <a href="{{ url_for('auth.login') }}" style="color: white;">Log in here</p>
+
+    </form>
+
+  </div>
+</div>
+<script>
+  function checkLoginAndRedirect(url) {
+      {% if not current_user.is_authenticated %}
+          alert('Please log in first.');
+      {% endif %}
+  }
+</script>
+{% endblock %}

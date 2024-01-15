@@ -1,0 +1,76 @@
+.posts-container {
+  padding: 1rem;
+}
+
+.posts-list {
+  list-style: none;
+}
+
+.post-element {
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  
+}
+
+.post-link {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-decoration: none;
+  color: white;
+  padding: 1rem;
+}
+
+.post-link p {
+  margin: 0.5rem 0;
+}
+
+.create-btn {
+  width: max-content;
+  padding: 0.5rem 2rem;
+  background-color: #8c37ec;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none; 
+}
+
+.create-btn:hover {
+  background-color: #5810ac;
+}
+
+.upvote-btn {
+  background: #8c37ec;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 5px;
+  padding: 0.5rem 1.25rem;
+  margin: 1rem;
+
+}
+
+.upvote-btn:hover {
+  background-color: #5810ac;
+}
+
+.upvote-count, .comment-count{
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.post-details {
+  display: flex;
+  align-items: center;
+  gap: 1rem; 
+}
+
+.create-btn {
+  display: inline-block; 
+  margin: 5rem 0 2rem 0; 
+  font-size: 1.25rem;
+  font-weight: 400;
+}
